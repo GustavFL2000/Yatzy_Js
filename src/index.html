@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,31 @@
 
     <title>Yatsy!</title>
 </head>
+
 <body>
     <h1>Yatsy</h1>
-    <div class = "terningFelt">
-        <div id="terning1"><p>1</p></div>
-        <div id="terning2"><p>2</p></div>
-        <div id="terning3"><p>3</p></div>
-        <div id="terning4"><p>4</p></div>
-        <div id="terning5"><p>5</p></div>
-        
+    <div class="terningFelt">
+        <div id="terning1">
+            <p>1</p>
+        </div>
+        <div id="terning2">
+            <p>2</p>
+        </div>
+        <div id="terning3">
+            <p>3</p>
+        </div>
+        <div id="terning4">
+            <p>4</p>
+        </div>
+        <div id="terning5">
+            <p>5</p>
+        </div>
+
         <div id="turNummer"> <label>Turn</label> </div>
         <div id="rollKnap"> <button>Roll!</button> </div>
     </div>
 
-    <div class = "scoreFelt">
+    <div class="scoreFelt">
         <div class="scoreLabel">
             <label>1s</label>
             <label>2s</label>
@@ -40,9 +52,25 @@
             <label>Yatzy</label>
         </div>
         <div class="score">
-            <input type="text">
+            <input type="text" id="ones" value="0">
+            <input type="number" id="twos" value="0">
+            <input type="number" id="threes" value="0">
+            <input type="number" id="fours" value="0">
+            <input type="number" id="fives" value="0">
+            <input type="number" id="sixes" value="0">
+
+            <input type="number" id="onePair" value="0">
+            <input type="number" id="twoPairs" value="0">
+            <input type="number" id="threeSame" value="0">
+            <input type="number" id="fourSame" value="0">
+            <input type="number" id="fullHouse" value="0">
+            <input type="number" id="smallStraight" value="0">
+            <input type="number" id="largeStraight" value="0">
+            <input type="number" id="chance" value="0">
+            <input type="number" id="yatzy" value="0">
         </div>
     </div>
 
 </body>
+
 </html>
