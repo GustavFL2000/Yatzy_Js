@@ -2,5 +2,26 @@
 display: grid;
 grid-template-rows: auto auto;
 grid-template-columns: auto auto auto auto auto;
+}
 
+#rollKnap{
+    grid-row: 2;
+    grid-column: 5;
+}
+
+.scoreFelt {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(15, auto);
+}
+
+.scoreLabel {
+    display: grid;
+    grid-template-rows: repeat(15, auto);
+    grid-column: 1;
+}
+.score{
+    display: grid;
+    grid-template-rows: repeat(15, auto);
+    grid-column: 2;
 }
