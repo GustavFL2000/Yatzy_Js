@@ -1,11 +1,7 @@
 export default class Terning {
     eyes;
 
-    Die(eyes) {
-        this.eyes = eyes;
-    }
-
-    Die() {
+    constructor() {
         this.eyes = 6;
     }
 
