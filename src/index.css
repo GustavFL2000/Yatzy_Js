@@ -1,0 +1,6 @@
+.terningFelt{
+display: grid;
+grid-template-rows: auto auto;
+grid-template-columns: auto auto auto auto auto;
+
+}
