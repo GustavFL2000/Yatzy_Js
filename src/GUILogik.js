@@ -15,7 +15,6 @@ rollButton.addEventListener("click", () => {
 });
 
 function updateTerninger() {
-    let rafflekop = new Rafflekop();
     rafflekop.kastTerning();
 
     let slag = rafflekop.getTerninger();
