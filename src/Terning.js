@@ -2,7 +2,7 @@ export default class Terning {
     eyes;
 
     constructor() {
-        this.eyes = 6;
+        this.eyes = 0;
     }
 
     roll() {

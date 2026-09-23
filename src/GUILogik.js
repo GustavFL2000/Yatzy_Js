@@ -1,40 +1,63 @@
 import Rafflekop from "./Rafflekop.js";
 import { tælØjne, getPossibleScores } from "./Logik.js";
 
+let rafflekop = new Rafflekop();
+
 let rollButton = document.querySelector("#rollKnap");
 let turn = 0;
 
-rollButton.addEventListener("click", () => {
-    let turNummer = document.querySelector("#turNummer");
+checkboxDisable();
 
-    if (turn < 3) {
-        updateTerninger()
-        turn++;
-        turNummer.innerHTML = "<label>" + 'Turn ' + turn + " / 3" + "</label>"
+rollButton.addEventListener("click", () => {
+    // Stop funktionen, hvis de tre kast er brugt.
+    if (turn >= 3) {
+        return;
     }
+
+    updateTerninger();
+    turn++;
+
+    // Efter første kast må spilleren holde terninger.
+    if (turn === 1) {
+        checkboxEnable();
+    }
+
+    let turNummer = document.querySelector("#turNummer");
+    turNummer.innerHTML =
+        "<label>Turn " + turn + " / 3</label>";
 });
 
-function updateTerninger() {
-    rafflekop.kastTerning();
+scoreView.addEventListener("click", () => {
 
-    let slag = rafflekop.getTerninger();
+});
+
+
+
+function updateTerninger() {
+    const slag = rafflekop.getTerninger();
+
+    for (let index = 0; index < slag.length; index++) {
+        const checkbox = document.querySelector(
+            "#box" + (index + 1) + " input"
+        );
+
+        // Kun ulåste terninger får en ny værdi.
+        if (!checkbox.checked) {
+            slag[index].roll();
+        }
+
+        // Vis altid terningens faktiske værdi.
+        const felt = document.querySelector("#terning" + (index + 1));
+        const eyes = slag[index].getEyes();
+        if (slag[index] === 0){
+            felt.innerHTML = '<img src="./images/terning'
+        }
+        felt.innerHTML =
+            '<img src="./images/terning ' + eyes + '.png" ' +
+            'alt="Terning med ' + eyes + ' øjne" class="terningBillede">';
+    }
 
     updateScores(slag);
-
-    let terning1 = document.querySelector("#terning1");
-    terning1.innerHTML = "<p>" + slag[0].getEyes() + "</p>";
-
-    let terning2 = document.querySelector("#terning2");
-    terning2.innerHTML = "<p>" + slag[1].getEyes() + "</p>";
-
-    let terning3 = document.querySelector("#terning3");
-    terning3.innerHTML = "<p>" + slag[2].getEyes() + "</p>";
-
-    let terning4 = document.querySelector("#terning4");
-    terning4.innerHTML = "<p>" + slag[3].getEyes() + "</p>";
-
-    let terning5 = document.querySelector("#terning5");
-    terning5.innerHTML = "<p>" + slag[4].getEyes() + "</p>";
 }
 
 function updateScores(slag) {
@@ -46,8 +69,13 @@ function updateScores(slag) {
     document.querySelector("#fours").textContent = scores.get("4'ere");
     document.querySelector("#fives").textContent = scores.get("5'ere");
     document.querySelector("#sixes").textContent = scores.get("6'ere");
-    document.querySelector("#sum").textContent = scores.get(""); //Hvordan updatere vi sum
-    document.querySelector("#bonus").textContent = scores.get(""); //Hvordan updatere vi bonus
+
+    document.querySelector("#sum").textContent = scores.get("upperSectionScore"); // Hvordan updatere vi sum
+
+    if ("#sum".textContent > 63) {
+        document.querySelector("#bonus").textContent = scores.get(50); //Hvordan updatere vi bonus
+    }
+
     document.querySelector("#onePair").textContent = scores.get("Et par");
     document.querySelector("#twoPairs").textContent = scores.get("To par");
     document.querySelector("#threeSame").textContent = scores.get("3 ens");
@@ -57,4 +85,26 @@ function updateScores(slag) {
     document.querySelector("#largeStraight").textContent = scores.get("Store straight");
     document.querySelector("#chance").textContent = scores.get("Chance");
     document.querySelector("#yatzy").textContent = scores.get("Yatzy");
+
+    document.querySelector("#total").textContent = scores.get(""); // Vi mangler at updatere total
+}
+
+function checkboxDisable() {
+    for (let index = 0; index < 5; index++) {
+        const checkbox = document.querySelector(
+            "#box" + (index + 1) + " input"
+        );
+
+        checkbox.checked = false;
+        checkbox.disabled = true;
+    }
+}
+function checkboxEnable() {
+    for (let index = 0; index < 5; index++) {
+        const checkbox = document.querySelector(
+            "#box" + (index + 1) + " input"
+        );
+
+        checkbox.disabled = false;
+    }
 }
