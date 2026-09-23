@@ -21,6 +21,11 @@ body {
     height: 80px;
 }
 
+.rollBillede{
+    width: 100px;
+    height: 50px;
+}
+
 #rollKnap {
     grid-row: 3;
     grid-column: 5;
@@ -30,19 +35,6 @@ body {
     grid-row: 3;
     grid-column: 1;
 }
-
-#rollKnap button {
-    border: 1px solid rgb(90, 89, 89);
-    background-color: white;
-    padding: 5px;
-}
-
-#rollKnap button:hover {
-    background-color: rgb(230, 229, 229);
-    border: 1px solid black;
-    cursor: pointer;
-}
-
 
 .scoreFelt {
     display: grid;
@@ -72,13 +64,15 @@ body {
 .total div {
     border: 1px solid rgb(90, 89, 89);
     padding: 5px;
-    width: 40px;
+    height: 30px;
+    width: 50px;
     text-align: center;
 }
 
 .scoreView {
     border: 1px solid rgb(90, 89, 89);
     padding: 5px;
+    height: 30px;
     width: 40px;
     text-align: center;
     cursor: pointer;
