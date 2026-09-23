@@ -1,5 +1,6 @@
 import Rafflekop from "./Rafflekop.js";
 
+let rafflekop = new Rafflekop();
 
 let rollButton = document.querySelector("#rollKnap");
 let turn = 0;
@@ -17,7 +18,6 @@ rollButton.addEventListener("click", () => {
 
 
 function updateTerninger() {
-    let rafflekop = new Rafflekop();
     rafflekop.kastTerning();
 
     let slag = rafflekop.getTerninger();
