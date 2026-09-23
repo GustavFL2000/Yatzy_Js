@@ -1,9 +1,9 @@
-let terningerArray = [];
 let antalArray = new Array(7);
 
-const tælØjne = () => { //Jaja det en hjælpe metode ( tæller hvor mange der er af hver øjenværdi)
+export const tælØjne = (terninger) => { //Jaja det en hjælpe metode ( tæller hvor mange der er af hver øjenværdi)
     antalArray.fill(0); //Den skal bruges i GUILogik.js køres efter hver gang der kastes en terning
-    for (let terning of terningerArray) {
+
+    for (let terning of terninger) {
         antalArray[terning.getEyes()]++;
     }
 }
@@ -91,7 +91,7 @@ export const yatzyScore = () => {
 
 
 
-export const getPossibleScores = () =>{
+export const getPossibleScores = () => {
     const scores = new Map();
 
     scores.set("1'ere", upperSectionScore(1));
@@ -104,9 +104,9 @@ export const getPossibleScores = () =>{
     scores.set("To par", twoPairScore());
     scores.set("3 ens", threeOfAKindScore());
     scores.set("4 ens", fourOfAKindScore());
+    scores.set("Fuldt hus", fullHouseScore());
     scores.set("Lille straight", smallStraightScore());
     scores.set("Store straight", largeStraightScore());
-    scores.set("Fuldt hus", fullHouseScore());
     scores.set("Chance", chanceScore());
     scores.set("Yatzy", yatzyScore());
 
