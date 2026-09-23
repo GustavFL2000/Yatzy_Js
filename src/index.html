@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.">
 
     <link rel="stylesheet" href="index.css">
 
@@ -11,64 +11,135 @@
 </head>
 
 <body>
+
     <h1>Yatsy</h1>
+
     <div class="terningFelt">
+
         <div id="terning1">
             <p>1</p>
         </div>
+
         <div id="terning2">
             <p>2</p>
         </div>
+
         <div id="terning3">
             <p>3</p>
         </div>
+
         <div id="terning4">
             <p>4</p>
         </div>
+
         <div id="terning5">
             <p>5</p>
         </div>
 
-        <div id="turNummer"> <label>Turn</label> </div>
-        <div id="rollKnap"> <button>Roll!</button> </div>
+        <div id="turNummer">
+            <label>Turn 1</label>
+        </div>
+
+        <div id="rollKnap">
+            <button>Roll!</button>
+        </div>
+
     </div>
 
-    <div class="scoreFelt">
-        <div class="scoreLabel">
-            <label>1s</label>
-            <label>2s</label>
-            <label>3s</label>
-            <label>4s</label>
-            <label>5s</label>
-            <label>6s</label>
-            <label>OnePAir</label>
-            <label>TwoPair</label>
-            <label>ThreeSame</label>
-            <label>FourSame</label>
-            <label>FullHouse</label>
-            <label>SmallStraight</label>
-            <label>LArgeStraight</label>
-            <label>Chance</label>
-            <label>Yatzy</label>
-        </div>
-        <div class="score">
-            <input type="text" id="ones" value="0">
-            <input type="number" id="twos" value="0">
-            <input type="number" id="threes" value="0">
-            <input type="number" id="fours" value="0">
-            <input type="number" id="fives" value="0">
-            <input type="number" id="sixes" value="0">
 
-            <input type="number" id="onePair" value="0">
-            <input type="number" id="twoPairs" value="0">
-            <input type="number" id="threeSame" value="0">
-            <input type="number" id="fourSame" value="0">
-            <input type="number" id="fullHouse" value="0">
-            <input type="number" id="smallStraight" value="0">
-            <input type="number" id="largeStraight" value="0">
-            <input type="number" id="chance" value="0">
-            <input type="number" id="yatzy" value="0">
+    <div class="scoreFelt">
+
+        <div class="scoreRow">
+            <label>1s</label>
+            <div id="ones" class="scoreView"></div>
         </div>
+
+        <div class="scoreRow">
+            <label>2s</label>
+            <div id="twos" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>3s</label>
+            <div id="threes" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>4s</label>
+            <div id="fours" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>5s</label>
+            <div id="fives" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>6s</label>
+            <div id="sixes" class="scoreView"></div>
+
+            <div class="sum">
+                <label>Sum</label>
+                <div id="sum"></div>
+            </div>
+
+            <div class="bonus">
+                <label>Bonus</label>
+                <div id="bonus"></div>
+            </div>
+        </div>
+
+
+        <div class="scoreRow">
+            <label>One pair</label>
+            <div id="onePair" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Two pairs</label>
+            <div id="twoPairs" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Three same</label>
+            <div id="threeSame" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Four same</label>
+            <div id="fourSame" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Full house</label>
+            <div id="fullHouse" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Small straight</label>
+            <div id="smallStraight" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Large straight</label>
+            <div id="largeStraight" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Chance</label>
+            <div id="chance" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Yatzy</label>
+            <div id="yatzy" class="scoreView"></div>
+
+            <div class="total">
+                <label>Total</label>
+                <div id="total"></div>
+            </div>
+        </div>
+
     </div>
 
 </body>
