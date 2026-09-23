@@ -28,7 +28,8 @@ rollButton.addEventListener("click", () => {
 });
 
 scoreView.addEventListener("click", () => {
-
+    //TODO
+    //Man skal kunne klikke på hver scoreView hvert scoreView har også eget ID
 });
 
 
@@ -49,9 +50,7 @@ function updateTerninger() {
         // Vis altid terningens faktiske værdi.
         const felt = document.querySelector("#terning" + (index + 1));
         const eyes = slag[index].getEyes();
-        if (slag[index] === 0){
-            felt.innerHTML = '<img src="./images/terning'
-        }
+            
         felt.innerHTML =
             '<img src="./images/terning ' + eyes + '.png" ' +
             'alt="Terning med ' + eyes + ' øjne" class="terningBillede">';
@@ -108,3 +107,8 @@ function checkboxEnable() {
         checkbox.disabled = false;
     }
 }
+
+//TODO
+//Beregn sum
+//Lås felter med værdi + til total og disable efterfølgende
+//
