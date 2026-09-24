@@ -1,35 +1,51 @@
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    margin: 20px;
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-image: url('./images/paper.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 20px;
 }
 
+/* Yatzy logo */
 .yatzyBillede {
-    height: 30%;
-    width: min(540px, 100%);
+    width: min(540px, 80vw);
+    height: auto;
 }
 
+
+/* Terninger */
 .terningFelt {
     display: grid;
     grid-template-rows: auto auto auto;
     grid-template-columns: repeat(5, 1fr);
 
-    width: min(540px, 100%);
+    width: min(540px, 90vw);
+
     padding: 20px;
     border: 1px solid black;
 }
 
-
 .terningBillede {
-    width: 80px;
-    height: 80px;
+    width: clamp(50px, 8vw, 80px);
+    height: auto;
 }
 
-.rollBillede{
-    width: 100px;
-    height: 50px;
+.rollBillede {
+    width: clamp(70px, 10vw, 100px);
+    height: auto;
 }
 
 #rollKnap {
@@ -42,9 +58,13 @@ body {
     grid-column: 1;
 }
 
+
+/* Score */
 .scoreFelt {
     display: grid;
-    width: min(540px, 100%);
+
+    width: min(540px, 90vw);
+
     padding: 20px;
     border: 1px solid black;
 }
@@ -52,7 +72,9 @@ body {
 .scoreRow {
     display: grid;
     grid-template-columns: 150px 60px 1fr 1fr;
+
     align-items: center;
+
     margin: 4px 0;
 }
 
@@ -68,19 +90,26 @@ body {
 .bonus div,
 .total div {
     border: 1px solid rgb(90, 89, 89);
+
     padding: 5px;
+
     height: 30px;
     width: 50px;
+
     text-align: center;
 }
 
 .scoreView,
 .scoreView2 {
     border: 1px solid rgb(90, 89, 89);
+
     padding: 5px;
+
     height: 30px;
     width: 40px;
+
     text-align: center;
+
     cursor: pointer;
 }
 
@@ -88,10 +117,10 @@ body {
 .scoreView2.locked {
     opacity: 0.5;
     background-color: rgb(210, 210, 210);
+
     cursor: default;
     pointer-events: none;
 }
-
 
 .scoreView:hover,
 .scoreView2:hover {
@@ -100,15 +129,21 @@ body {
     cursor: pointer;
 }
 
+
+/* Mindre skærme */
 @media (max-width: 600px) {
 
     body {
-        margin: 10px;
+        padding: 10px;
+    }
+
+    .yatzyBillede {
+        width: 80vw;
     }
 
     .terningFelt,
     .scoreFelt {
-        width: 100%;
+        width: 95vw;
         padding: 10px;
     }
 
