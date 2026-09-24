@@ -21,13 +21,12 @@ describe("Test logikken", function () {
         terninger[3].eyes = 5;
         terninger[4].eyes = 5;
 
-        tælØjne(terninger);
 
         const result = fullHouseScore();
 
         expect(result).to.equal(22);
     });
-    
+
     it("skal give 0 hvis hånden ikke er et full house", function () {
 
         const terninger = [
@@ -44,8 +43,8 @@ describe("Test logikken", function () {
         terninger[3].eyes = 4;
         terninger[4].eyes = 5;
 
-        tælØjne(terninger);
 
+        
         const result = fullHouseScore();
 
         expect(result).to.equal(0);
