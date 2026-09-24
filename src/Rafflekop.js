@@ -9,7 +9,7 @@ export default class Rafflekop{
         }
     }
 
-    kastTerning(){
+     kastTerning(){
         for(let terning of this.terninger){
             terning.roll();
         }
@@ -20,3 +20,4 @@ export default class Rafflekop{
     }
     
 }
+

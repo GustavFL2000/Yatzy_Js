@@ -88,6 +88,10 @@ export const yatzyScore = () => {
     }
     return 0;
 }
+function reset(){
+    return liste = [];
+}
+export{reset}
 
 
 
