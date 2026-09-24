@@ -39,8 +39,8 @@ describe("Test logikken", function () {
         ];
 
         terninger[0].eyes = 4;
-        terninger[1].eyes = 4;
-        terninger[2].eyes = 4;
+        terninger[1].eyes = 2;
+        terninger[2].eyes = 1;
         terninger[3].eyes = 4;
         terninger[4].eyes = 5;
 

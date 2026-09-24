@@ -1,8 +1,12 @@
 {
-  "devDependencies": {
-    "chai": "^6.2.2"
+  "scripts": {
+    "test": "mocha"
   },
-  "dependencies": {
+  "type": "module",
+  "devDependencies": {
+    "chai": "^6.2.2",
     "mocha": "^11.8.0"
   }
 }
+
+
