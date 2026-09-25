@@ -50,7 +50,7 @@ scoreViews.forEach(scoreView => {
 
         for (let index = 0; index < 5; index++) {
             const felt = document.querySelector("#terning" + (index + 1));
-            felt.innerHTML = '<p><img src="./images/startTerning.png" alt="Terning med ? øjne" class="terningBillede"></p>'
+            felt.innerHTML = '<p><img src="/images/startTerning.png" alt="Terning med ? øjne" class="terningBillede"></p>'
         }
 
         scoreViews.forEach((felt) => {
@@ -84,7 +84,7 @@ function updateTerninger() {
         const eyes = slag[index].getEyes();
 
         felt.innerHTML =
-            '<img src="./images/terning ' + eyes + '.png" ' +
+            '<img src="/images/terning ' + eyes + '.png" ' +
             'alt="Terning med ' + eyes + ' øjne" class="terningBillede">';
     }
 
