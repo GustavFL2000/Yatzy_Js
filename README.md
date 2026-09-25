@@ -11,3 +11,6 @@
 - I Yatzy_js mappen kør:
     - npm install ()
     - npm run dev
+
+### Spil: Deployment gennem cloudflare
+- [**Spil Yatzy online**](https://yatzy-js.gustavfl13.workers.dev/)
