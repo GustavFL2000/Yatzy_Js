@@ -1,12 +1,6 @@
 
 import {
-    kastTerninger,
-    getTurn,
-    resetTurn,
-    lockScore,
-    isScoreLocked,
-    isGameOver,
-    getScoreSummary
+    kastTerninger
 } from "./Facade.js";
 
 let rollButton = document.querySelector("#rollKnap");
@@ -14,19 +8,20 @@ let turNummer = document.querySelector("#turNummer");
 
 const scoreViews = document.querySelectorAll(".scoreView, .scoreView2");
 
-checkboxDisable();
+//checkboxDisable();
 
 // Event listener til kast-knappen.
 rollButton.addEventListener("click", () => {
-
+/*
     // Stop hvis spilleren har brugt sine tre kast.
     if (getTurn() >= 3) {
         return;
     }
 
     // Hent information om hvilke terninger der er låst.
+    */
     let lockedDice = [];
-
+/*
     for (let index = 0; index < 5; index++) {
 
         const checkbox = document.querySelector(
@@ -35,10 +30,11 @@ rollButton.addEventListener("click", () => {
 
         lockedDice.push(checkbox.checked);
     }
-
+*/
     // Bed logikken om at kaste terningerne.
     const result = kastTerninger(lockedDice);
 
+    /*
     if (result === null) {
         return;
     }
@@ -57,9 +53,10 @@ rollButton.addEventListener("click", () => {
     // Opdater visning af antal kast.
     turNummer.innerHTML =
         "<label>Turn " + result.turn + " / 3</label>";
+    */
 });
 
-
+/*
 // Event listeners til pointfelterne.
 scoreViews.forEach(scoreView => {
 
@@ -222,3 +219,4 @@ function checkboxEnable() {
         checkbox.disabled = false;
     }
 }
+*/

@@ -1,32 +1,17 @@
-import express, { request, response } from 'express';
+import express from 'express';
+import cors from 'cors'
+import { kastTerninger } from './Logik.js';
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 let port = 8000;
 
-app.listen(port);
-console.log("Lytter på port: " + port);
-
-async function get(url) {
-    const respons = await fetch(url);
-    if (respons.status !== 200) // OK
-        throw new Error(respons.status);
-    return await respons.json();
-}
-
-async function post(url, objekt) {
-    const respons = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(objekt),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    if (respons.status !== 201)
-        throw new Error(respons.status);
-
-    return true;
-}
+app.get('/test', (request, response) => {
+    console.log('test');
+    response.sendStatus(200);
+});
 
 app.post('/terning', (request, response) => {
 
@@ -40,12 +25,14 @@ app.post('/terning', (request, response) => {
         });
     }
 
-    response.status(200).json({
+    response.status(201).json({
         turn: result.turn,
         terninger: result.terninger.map(t => t.getEyes()),
         scores: Object.fromEntries(result.scores)
     });
 });
 
+app.listen(port);
 
+console.log("Lytter på port: " + port);
 

@@ -22,7 +22,7 @@ export const kastTerninger = (lockedDice) => {
             terninger[index].roll();
         }
     }
-
+    console.log('test')
     turn++;
 
     tælØjne(terninger);
