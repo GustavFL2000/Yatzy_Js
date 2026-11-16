@@ -7,7 +7,7 @@ import {
     isScoreLocked,
     isGameOver,
     getScoreSummary
-} from "./Logik.js";
+} from "./Facade.js";
 
 let rollButton = document.querySelector("#rollKnap");
 let turNummer = document.querySelector("#turNummer");
