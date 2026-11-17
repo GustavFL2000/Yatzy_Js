@@ -4,11 +4,12 @@ import Rafflekop from "./Rafflekop.js";
 let rafflekop = new Rafflekop();
 let lockedScores = new Map();
 let turn = 0;
+let lockedDice = new Array(5).fill(false);
 
 let antalArray = new Array(7).fill(0);
 
 // Kaster alle terninger, der ikke er låst.
-export const kastTerninger = (lockedDice) => {
+export const kastTerninger = () => {
 
     if (turn >= 3) {
         return null;
@@ -39,9 +40,9 @@ export const getTurn = () => {
     return turn;
 };
 
-// Nulstiller antal kast efter valg af pointfelt.
 export const resetTurn = () => {
     turn = 0;
+    lockedDice.fill(false);
 };
 
 // Registrerer et valgt pointfelt.
@@ -56,6 +57,10 @@ export const lockScore = (scoreId, scoreValue) => {
     resetTurn();
 
     return true;
+};
+
+export const setLockedDice = (index, locked) => {
+    lockedDice[index] = locked;
 };
 
 // Kontrollerer om et pointfelt allerede er valgt.

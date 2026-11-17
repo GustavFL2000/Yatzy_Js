@@ -1,6 +1,8 @@
 
 import {
-    kastTerninger
+    kastTerninger,
+    setLockedDice,
+    isScoreLocked
 } from "./Facade.js";
 
 let rollButton = document.querySelector("#rollKnap");
@@ -8,56 +10,99 @@ let turNummer = document.querySelector("#turNummer");
 
 const scoreViews = document.querySelectorAll(".scoreView, .scoreView2");
 
-//checkboxDisable();
+let currentTurn = 0;
+let pendingLocks = 0;
+let rolling = false;
+
+checkboxDisable();
 
 // Event listener til kast-knappen.
-rollButton.addEventListener("click", () => {
-/*
-    // Stop hvis spilleren har brugt sine tre kast.
-    if (getTurn() >= 3) {
+rollButton.addEventListener("click", async () => {
+
+    // Stop hvis spilleren har brugt sine tre kast,
+    // eller hvis serveren stadig behandler en request.
+    if (currentTurn >= 3 || rolling || pendingLocks > 0) {
         return;
     }
 
-    // Hent information om hvilke terninger der er låst.
-    */
-    let lockedDice = [];
-/*
-    for (let index = 0; index < 5; index++) {
+    rolling = true;
+    document.querySelector("#rollKnap button").disabled = true;
 
-        const checkbox = document.querySelector(
-            "#box" + (index + 1) + " input"
-        );
+    try {
+        // Bed serveren om at kaste terningerne.
+        const result = await kastTerninger();
 
-        lockedDice.push(checkbox.checked);
+        currentTurn = result.turn;
+
+        // Vis terningerne.
+        updateTerninger(result.terninger);
+
+        // Vis de mulige point.
+        updateScores(result.scores);
+
+        // Efter første kast kan spilleren låse terninger.
+        if (result.turn === 1) {
+            checkboxEnable();
+        }
+
+        // Opdater visning af antal kast.
+        turNummer.innerHTML =
+            "<label>Turn " + result.turn + " / 3</label>";
+
+    } catch (error) {
+        console.error("Fejl ved kast:", error);
+
+    } finally {
+        rolling = false;
+
+        if (currentTurn < 3 && pendingLocks === 0) {
+            document.querySelector("#rollKnap button").disabled = false;
+        }
     }
-*/
-    // Bed logikken om at kaste terningerne.
-    const result = kastTerninger(lockedDice);
-
-    /*
-    if (result === null) {
-        return;
-    }
-
-    // Vis terningerne.
-    updateTerninger(result.terninger);
-
-    // Vis de mulige point.
-    updateScores(result.scores);
-
-    // Efter første kast kan spilleren låse terninger.
-    if (getTurn() === 1) {
-        checkboxEnable();
-    }
-
-    // Opdater visning af antal kast.
-    turNummer.innerHTML =
-        "<label>Turn " + result.turn + " / 3</label>";
-    */
 });
 
-/*
+// Event listeners til checkboxene.
+for (let index = 0; index < 5; index++) {
+
+    const checkbox = document.querySelector(
+        "#box" + (index + 1) + " input"
+    );
+
+    checkbox.addEventListener("change", async () => {
+
+        const locked = checkbox.checked;
+
+        pendingLocks++;
+        checkbox.disabled = true;
+        document.querySelector("#rollKnap button").disabled = true;
+
+        try {
+            // Send låsningen gennem facaden til serveren.
+            await setLockedDice(index, locked);
+
+        } catch (error) {
+            // Gendan checkboxen, hvis serveren afviser.
+            checkbox.checked = !locked;
+            console.error("Fejl ved låsning:", error);
+
+        } finally {
+            pendingLocks--;
+
+            if (currentTurn > 0 && currentTurn < 3) {
+                checkbox.disabled = false;
+            }
+
+            if (pendingLocks === 0 && !rolling && currentTurn < 3) {
+                document.querySelector("#rollKnap button").disabled = false;
+            }
+        }
+    });
+}
+
 // Event listeners til pointfelterne.
+// Mangler endpoints til lockScore, isScoreLocked(lavet),
+// getScoreSummary og isGameOver.
+/*
 scoreViews.forEach(scoreView => {
 
     scoreView.addEventListener("click", () => {
@@ -105,7 +150,7 @@ scoreViews.forEach(scoreView => {
             );
 
             felt.innerHTML =
-                '<p><img src="/images/startTerning.png" ' +
+                '<p><img src="../public/images/startTerning.png" ' +
                 'alt="Terning med ? øjne" ' +
                 'class="terningBillede"></p>';
         }
@@ -125,7 +170,7 @@ scoreViews.forEach(scoreView => {
 
     });
 });
-
+*/
 
 // Opdater terningbillederne i HTML.
 function updateTerninger(terninger) {
@@ -136,15 +181,15 @@ function updateTerninger(terninger) {
             "#terning" + (index + 1)
         );
 
-        const eyes = terninger[index].getEyes();
+        // Serveren returnerer tal, ikke Terning-objekter.
+        const eyes = terninger[index];
 
         felt.innerHTML =
-            '<img src="/images/terning ' + eyes + '.png" ' +
+            '<img src="../public/images/terning ' + eyes + '.png" ' +
             'alt="Terning med ' + eyes + ' øjne" ' +
             'class="terningBillede">';
     }
 }
-
 
 // Opdater de mulige point i HTML.
 function updateScores(scores) {
@@ -169,17 +214,21 @@ function updateScores(scores) {
 
     for (const [id, scoreName] of Object.entries(scoreMapping)) {
 
-        // Opdater kun pointfelter, der ikke allerede er låst.
-        if (!isScoreLocked(id)) {
+        const felt = document.querySelector("#" + id);
 
-            document.querySelector("#" + id).textContent =
-                scores.get(scoreName);
+        // Opdater kun pointfelter, der ikke allerede er låst.
+        // Tidligere: if (!isScoreLocked(id))
+        if (!felt.classList.contains("locked")) {
+
+            // Serveren returnerer et JSON-objekt, ikke et Map.
+            felt.textContent = scores[scoreName];
         }
     }
 }
 
-
 // Opdater sum, bonus og total.
+// Mangler endpoint til getScoreSummary.
+/*
 function updateScore() {
 
     const summary = getScoreSummary();
@@ -190,7 +239,7 @@ function updateScore() {
 
     document.querySelector("#total").textContent = summary.total;
 }
-
+*/
 
 // Deaktiver checkboxes og fjern deres markering.
 function checkboxDisable() {
@@ -206,7 +255,6 @@ function checkboxDisable() {
     }
 }
 
-
 // Aktiver checkboxes efter første kast.
 function checkboxEnable() {
 
@@ -219,4 +267,3 @@ function checkboxEnable() {
         checkbox.disabled = false;
     }
 }
-*/

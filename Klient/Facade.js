@@ -17,12 +17,22 @@ async function post(url, objekt) {
     if (respons.status !== 201)
         throw new Error(respons.status);
 
-    return true;
+    return await respons.json();
 }
 
-export const kastTerninger = async (lockedDice) => {
-    return await post(url + "/terning", {
-        lockedDice: lockedDice
+export const isScoreLocked = async (scoreId) => {
+    const result = await get(url + "/score/locked/" + encodeURIComponent(scoreId));
+    return result.locked;
+};
+
+export const kastTerninger = async () => {
+    return await post(url + "/terning", {});
+};
+
+export const setLockedDice = async (index, locked) => {
+    return await post(url + "/terning/lock", {
+        index: index,
+        locked: locked
     });
 };
 
