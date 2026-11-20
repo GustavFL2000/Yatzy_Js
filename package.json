@@ -3,7 +3,7 @@
     "test": "mocha",
     "build": "vite build",
     "preview": "vite preview",
-    "dev" : "vite"
+    "dev": "vite"
   },
   "type": "module",
   "devDependencies": {
