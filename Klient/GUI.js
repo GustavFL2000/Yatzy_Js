@@ -100,7 +100,7 @@ for (let index = 0; index < 5; index++) {
 }
 
 // Event listeners til pointfelterne.
-// Mangler endpoints til lockScore, isScoreLocked(lavet),
+// Mangler endpoints til lockScore,,
 // getScoreSummary og isGameOver.
 /*
 scoreViews.forEach(scoreView => {
