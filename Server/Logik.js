@@ -23,7 +23,6 @@ export const kastTerninger = () => {
             terninger[index].roll();
         }
     }
-    console.log('test')
     turn++;
 
     tælØjne(terninger);

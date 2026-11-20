@@ -185,7 +185,7 @@ function updateTerninger(terninger) {
         const eyes = terninger[index];
 
         felt.innerHTML =
-            '<img src="../public/images/terning ' + eyes + '.png" ' +
+            '<img src="/images/terning ' + eyes + '.png" ' +
             'alt="Terning med ' + eyes + ' øjne" ' +
             'class="terningBillede">';
     }
