@@ -2,7 +2,11 @@
 import {
     kastTerninger,
     setLockedDice,
-    isScoreLocked
+    isScoreLocked,
+    lockScore,
+    isGameOver,
+    getTurn,
+    getScoreSummary
 } from "./Facade.js";
 
 let rollButton = document.querySelector("#rollKnap");
@@ -102,10 +106,9 @@ for (let index = 0; index < 5; index++) {
 // Event listeners til pointfelterne.
 // Mangler endpoints til lockScore,,
 // getScoreSummary og isGameOver.
-/*
 scoreViews.forEach(scoreView => {
 
-    scoreView.addEventListener("click", () => {
+    scoreView.addEventListener("click", async () =>  {
 
         // Hent pointværdien fra HTML.
         const scoreValue = scoreView.textContent.trim();
@@ -113,15 +116,15 @@ scoreViews.forEach(scoreView => {
         // Stop hvis der ikke er kastet, feltet allerede er valgt,
         // eller feltet ikke indeholder en pointværdi.
         if (
-            getTurn() === 0 ||
-            isScoreLocked(scoreView.id) ||
+           await getTurn() === 0 ||
+           await isScoreLocked(scoreView.id) ||
             scoreValue === ""
         ) {
             return;
         }
 
         // Bed logikken om at registrere det valgte pointfelt.
-        const success = lockScore(
+        const success =  await lockScore(
             scoreView.id,
             Number(scoreValue)
         );
@@ -132,6 +135,8 @@ scoreViews.forEach(scoreView => {
 
         // Vis at pointfeltet er låst.
         scoreView.classList.add("locked");
+
+        currentTurn = 0;
 
         // Nulstil checkboxes.
         checkboxDisable();
@@ -150,27 +155,26 @@ scoreViews.forEach(scoreView => {
             );
 
             felt.innerHTML =
-                '<p><img src="../public/images/startTerning.png" ' +
+                '<p><img src="/images/startTerning.png" ' +
                 'alt="Terning med ? øjne" ' +
                 'class="terningBillede"></p>';
         }
 
         // Ryd de pointfelter, der endnu ikke er låst.
-        scoreViews.forEach(felt => {
+       scoreViews.forEach(felt => {
 
-            if (!isScoreLocked(felt.id)) {
-                felt.textContent = "";
-            }
+         if (!felt.classList.contains("locked")) {
+        felt.textContent = "";
+    }
         });
 
         // Stop spillet hvis alle pointfelter er valgt.
-        if (isGameOver()) {
-            document.querySelector("#rollKnap button").disabled = true;
-        }
+        document.querySelector("#rollKnap button").disabled =
+         await isGameOver();
 
     });
 });
-*/
+
 
 // Opdater terningbillederne i HTML.
 function updateTerninger(terninger) {
@@ -228,10 +232,10 @@ function updateScores(scores) {
 
 // Opdater sum, bonus og total.
 // Mangler endpoint til getScoreSummary.
-/*
-function updateScore() {
 
-    const summary = getScoreSummary();
+async function updateScore(){
+
+    const summary = await getScoreSummary();
 
     document.querySelector("#sum").textContent = summary.sum;
 
@@ -239,7 +243,6 @@ function updateScore() {
 
     document.querySelector("#total").textContent = summary.total;
 }
-*/
 
 // Deaktiver checkboxes og fjern deres markering.
 function checkboxDisable() {
