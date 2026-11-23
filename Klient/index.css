@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -129,6 +128,31 @@ body {
     cursor: pointer;
 }
 
+.spillerFelt {
+    position: absolute;
+    top: 263px;
+    left: calc(50% + 290px);
+}
+
+.spillerTable {
+    border-collapse: collapse;
+    min-width: 180px;
+}
+
+.spillerTable th,
+.spillerTable td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+    .spillerFelt {
+        position: static;
+        margin-top: 20px;
+    }
+}
+
 
 /* Mindre skærme */
 @media (max-width: 600px) {
@@ -223,4 +247,6 @@ body {
         justify-content: flex-start;
         margin-top: 5px;
     }
+
+
 }
