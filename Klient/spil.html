@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.">
+
+    <link rel="stylesheet" href="./spil.css">
+    <script type="module" src="./GUI.js" defer></script>
+
+
+    <title>Yatzy!</title>
+</head>
+
+<body>
+
+    <h1><img src="/images/Yatzy.png" alt="Yatzy" class="yatzyBillede"> </h1>
+
+    <div class="terningFelt">
+
+        <div id="terning1" class="terning">
+            <p><img src="/images/startTerning.png" alt="Terning med ? øjne" class="terningBillede"></p>
+        </div>
+
+        <div id="terning2" class="terning">
+            <p><img src="/images/startTerning.png" alt="Terning med ? øjne" class="terningBillede"></p>
+        </div>
+
+        <div id="terning3" class="terning">
+            <p><img src="/images/startTerning.png" alt="Terning med ? øjne" class="terningBillede"></p>
+        </div>
+
+        <div id="terning4" class="terning">
+            <p><img src="/images/startTerning.png" alt="Terning med ? øjne" class="terningBillede"></p>
+        </div>
+
+        <div id="terning5" class="terning">
+            <p><img src="/images/startTerning.png" alt="Terning med ? øjne" class="terningBillede"></p>
+        </div>
+
+        <div id="box1">
+            <input type="checkbox">
+        </div>
+
+        <div id="box2">
+            <input type="checkbox">
+        </div>
+
+        <div id="box3">
+            <input type="checkbox">
+        </div>
+
+        <div id="box4">
+            <input type="checkbox">
+        </div>
+
+        <div id="box5">
+            <input type="checkbox">
+        </div>
+
+        <div id="turNummer">
+            <label>Turn 0 / 3</label>
+        </div>
+
+        <div id="rollKnap">
+            <button><img src="/images/rollBillede.png" alt="Roll knap ?" class="rollBillede"></button>
+        </div>
+
+    </div>
+
+
+    <div class="scoreFelt">
+
+        <div class="scoreRow">
+            <label>1's (5)</label>
+            <div id="ones" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>2's (10)</label>
+            <div id="twos" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>3's (15)</label>
+            <div id="threes" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>4's (20)</label>
+            <div id="fours" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>5's (25)</label>
+            <div id="fives" class="scoreView"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>6's (30)</label>
+            <div id="sixes" class="scoreView"></div>
+
+            <div class="sum">
+                <label>Sum</label>
+                <div id="sum"></div>
+            </div>
+
+            <div class="bonus">
+                <label>Bonus (63)</label>
+                <div id="bonus"></div>
+            </div>
+        </div>
+
+
+        <div class="scoreRow">
+            <label>One pair (12)</label>
+            <div id="onePair" class="scoreView2"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Two pairs (22)</label>
+            <div id="twoPairs" class="scoreView2"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Three same (18)</label>
+            <div id="threeSame" class="scoreView2"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Four same (24)</label>
+            <div id="fourSame" class="scoreView2"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Small straight (15)</label>
+            <div id="smallStraight" class="scoreView2"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Large straight (20)</label>
+            <div id="largeStraight" class="scoreView2"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Full house (28)</label>
+            <div id="fullHouse" class="scoreView2"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Chance (30)</label>
+            <div id="chance" class="scoreView2"></div>
+        </div>
+
+        <div class="scoreRow">
+            <label>Yatzy (50)</label>
+            <div id="yatzy" class="scoreView2"></div>
+
+            <div class="total">
+                <label>Total</label>
+                <div id="total"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="spillerFelt">
+    <table class="spillerTable">
+        <thead>
+            <tr>
+                <th>Spiller</th>
+                <th>Point</th>
+            </tr>
+        </thead>
+        <tbody id="spillerListe"></tbody>
+    </table>
+</div>
+
+</body>
+
+</html>

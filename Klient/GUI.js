@@ -6,7 +6,9 @@ import {
     lockScore,
     isGameOver,
     getTurn,
-    getScoreSummary
+    getScoreSummary,
+    getSpillere,
+    sendAktiv
 } from "./Facade.js";
 
 let rollButton = document.querySelector("#rollKnap");
@@ -270,3 +272,49 @@ function checkboxEnable() {
         checkbox.disabled = false;
     }
 }
+
+const spillerListe = document.querySelector("#spillerListe");
+
+async function opdaterSpillerListe() {
+
+    try {
+        const spillere = await getSpillere();
+
+        spillerListe.innerHTML = "";
+
+        for (const spiller of spillere) {
+
+            const række = document.createElement("tr");
+
+            const navn = document.createElement("td");
+            navn.textContent = spiller.navn;
+
+            const point = document.createElement("td");
+            point.textContent = spiller.point;
+
+            række.appendChild(navn);
+            række.appendChild(point);
+
+            spillerListe.appendChild(række);
+        }
+
+    } catch (error) {
+        console.error("Kunne ikke hente spillere:", error);
+    }
+}
+
+async function aktivitet() {
+    try {
+        await sendAktiv();
+    } catch (error) {
+        console.error("Aktivitet fejlede", error);
+    }
+}
+
+aktivitet();
+
+setInterval(aktivitet, 5000);
+
+opdaterSpillerListe();
+
+setInterval(opdaterSpillerListe, 2000);
