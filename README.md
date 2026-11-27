@@ -3,12 +3,12 @@
 
 
 ### Vite: Kør spillet lokalt
-- I Yatzy(rod) mappen kør:
+- I Yatzy_Js(rod) mappen kør:
     - npm install ()
     - npm run dev
 
 ### Express: Kør serveren
-- I Server mappen kør:
+- I Server(/Yatzy_Js/Server) mappen kør:
   - node server.js
 
 ### Spil: Deployment gennem cloudflare (W.I.P)
@@ -16,14 +16,14 @@
 
 
 ### Modules: Installer dependencies
-- I Yatzy_js mappen kør:
+- I Yatzy_js(rod) mappen kør:
   - npm i cors
   - npm i express
   - npm i session
 
 
 ### Test: For at køre test
-- I Yatzy(rod) mappen kør:
+- I Yatzy_Js(rod) mappen kør:
   -  npm i mocha@11.8.0
   -  npm i chai
     -  npm test
