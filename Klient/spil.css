@@ -45,12 +45,46 @@ body {
 .rollBillede {
     width: clamp(70px, 10vw, 100px);
     height: auto;
+    cursor: pointer;
 }
 
 #rollKnap {
     grid-row: 3;
     grid-column: 5;
+ 
 }
+
+#genstart {
+    padding: 10px;
+    text-align: center;
+}
+
+.genstartknap {
+    background-color: rgb(200, 42, 42);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Hover gælder kun, når knappen er aktiv */
+.genstartknap:hover:not(:disabled) {
+    background-color: rgb(143, 38, 38);
+}
+
+/* Deaktiveret knap */
+.genstartknap:disabled {
+    opacity: 0.5;
+    background-color: rgb(210, 210, 210);
+    color: gray;
+    cursor: default;
+}
+
+
+
 
 #turNummer {
     grid-row: 3;

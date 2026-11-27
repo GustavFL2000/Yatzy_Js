@@ -8,10 +8,12 @@ import {
     getTurn,
     getScoreSummary,
     getSpillere,
-    sendAktiv
+    sendAktiv,
+    restartGame
 } from "./Facade.js";
 
 let rollButton = document.querySelector("#rollKnap");
+let genstartButton = document.querySelector("#genstart");
 let turNummer = document.querySelector("#turNummer");
 
 const scoreViews = document.querySelectorAll(".scoreView, .scoreView2");
@@ -67,6 +69,29 @@ rollButton.addEventListener("click", async () => {
     }
 });
 
+// Event listener til genstartknap
+genstartButton.addEventListener("click", async () => {
+    try {
+        await restartGame();
+
+        resetTurnGUI();
+
+        // Ryd og lås alle pointfelter op.
+        scoreViews.forEach(felt => {
+            felt.classList.remove("locked");
+            felt.textContent = "";
+        });
+
+        await updateScore();
+
+        document.querySelector("#rollKnap button").disabled = false;
+        document.querySelector("#genstart button").disabled = true;
+
+    } catch (error) {
+        console.error("Fejl ved restart:", error);
+    }
+});
+
 // Event listeners til checkboxene.
 for (let index = 0; index < 5; index++) {
 
@@ -105,28 +130,44 @@ for (let index = 0; index < 5; index++) {
     });
 }
 
+function resetTurnGUI() {
+    currentTurn = 0;
+
+    checkboxDisable();
+
+    turNummer.innerHTML = "<label>Turn 0 / 3</label>";
+
+    for (let index = 0; index < 5; index++) {
+        const felt = document.querySelector(
+            "#terning" + (index + 1)
+        );
+
+        felt.innerHTML =
+            '<p><img src="/images/startTerning.png" ' +
+            'alt="Terning med ? øjne" ' +
+            'class="terningBillede"></p>';
+    }
+}
+
 // Event listeners til pointfelterne.
 // Mangler endpoints til lockScore,,
 // getScoreSummary og isGameOver.
+
 scoreViews.forEach(scoreView => {
 
-    scoreView.addEventListener("click", async () =>  {
+    scoreView.addEventListener("click", async () => {
 
-        // Hent pointværdien fra HTML.
         const scoreValue = scoreView.textContent.trim();
 
-        // Stop hvis der ikke er kastet, feltet allerede er valgt,
-        // eller feltet ikke indeholder en pointværdi.
         if (
-           await getTurn() === 0 ||
-           await isScoreLocked(scoreView.id) ||
+            await getTurn() === 0 ||
+            await isScoreLocked(scoreView.id) ||
             scoreValue === ""
         ) {
             return;
         }
 
-        // Bed logikken om at registrere det valgte pointfelt.
-        const success =  await lockScore(
+        const success = await lockScore(
             scoreView.id,
             Number(scoreValue)
         );
@@ -135,48 +176,25 @@ scoreViews.forEach(scoreView => {
             return;
         }
 
-        // Vis at pointfeltet er låst.
         scoreView.classList.add("locked");
 
-        currentTurn = 0;
+        resetTurnGUI();
 
-        // Nulstil checkboxes.
-        checkboxDisable();
+        await updateScore();
 
-        // Opdater sum, bonus og total.
-        updateScore();
-
-        // Vis at en ny tur starter.
-        turNummer.innerHTML = "<label>Turn 0 / 3</label>";
-
-        // Nulstil terningbillederne.
-        for (let index = 0; index < 5; index++) {
-
-            const felt = document.querySelector(
-                "#terning" + (index + 1)
-            );
-
-            felt.innerHTML =
-                '<p><img src="/images/startTerning.png" ' +
-                'alt="Terning med ? øjne" ' +
-                'class="terningBillede"></p>';
-        }
-
-        // Ryd de pointfelter, der endnu ikke er låst.
-       scoreViews.forEach(felt => {
-
-         if (!felt.classList.contains("locked")) {
-        felt.textContent = "";
-    }
+        // Ryd kun pointfelter, der ikke er låst.
+        scoreViews.forEach(felt => {
+            if (!felt.classList.contains("locked")) {
+                felt.textContent = "";
+            }
         });
 
-        // Stop spillet hvis alle pointfelter er valgt.
-        document.querySelector("#rollKnap button").disabled =
-         await isGameOver();
+        const gameover = await isGameOver();
 
+        document.querySelector("#rollKnap button").disabled = gameover;
+        document.querySelector("#genstart button").disabled = !gameover;
     });
 });
-
 
 // Opdater terningbillederne i HTML.
 function updateTerninger(terninger) {
@@ -305,13 +323,13 @@ async function opdaterSpillerListe() {
 
 async function aktivitet() { //Bruger send aktiv fra facade
     try {
-        await sendAktiv(); //Kalder denne fra facde
+        await sendAktiv(); //Kalder denne fra facade
     } catch (error) {
         console.error("Aktivitet fejlede", error);
     }
 }
 
-aktivitet(); //Vi alder den lokale funktion 
+aktivitet(); //Vi kalder den lokale funktion 
 
 setInterval(aktivitet, 5000); //Vi kalder aktivitet fucktionen en gang hver 5 sekund
 

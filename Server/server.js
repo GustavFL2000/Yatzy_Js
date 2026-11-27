@@ -17,9 +17,10 @@ app.use(cors({
 app.use(session({
   secret: "hemmelig",
   resave: false,
+  rolling: true,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000*60*3,
+    maxAge: 1000*60*100,
     httpOnly: true,
     sameSite: "lax"
   }
@@ -152,6 +153,25 @@ app.post("/login", (req, res) => {
       spiller: req.session.spiller
     });
   });
+});
+
+app.post("/restart", findSpil, (req, res) => {
+
+    // Nulstiller spillerens point i sessionen
+    req.session.spiller.point = 0;
+
+    // Finder spillerens eksisterende element i mappet
+    const spiller = spilSessions.get(req.sessionID);
+
+    // Erstatter det gamle spil med et nyt
+    spiller.spil = new Spil();
+
+    // Opdaterer seneste aktivitet
+    spiller.sidstAktiv = Date.now();
+
+    res.status(200).json({
+        message: "Spillet er genstartet"
+    });
 });
 
 app.get("/mig", findSpil, (req, res) => { //Hjælpe metode til luge at tjkekke at vi kunne få spilleren fra sessionen 

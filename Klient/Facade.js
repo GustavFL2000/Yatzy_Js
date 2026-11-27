@@ -5,7 +5,7 @@ async function get(url) {
         credentials: "include"
     });
 
-    if (respons.status !== 200) {
+    if (!respons.ok) {
         throw new Error(respons.status);
     }
 
@@ -22,7 +22,7 @@ async function post(url, objekt) {
         }
     });
 
-    if (respons.status !== 201) {
+    if (!respons.ok) {
         throw new Error(respons.status);
     }
 
@@ -84,3 +84,7 @@ export const getSpillere = async () => {
 export const sendAktiv = async () => { //Kald til aktiv endpointet (det er den her heartbeat fuktion der ligger og tjekker om spilleren stadig er aktiv)
     return await post(url + "/aktiv", {});
 };
+
+export const restartGame = async () => {
+    return await post(url + "/restart", {});
+}
