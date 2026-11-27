@@ -136,12 +136,12 @@ app.post("/login", (req, res) => {
       });
     }
 
-    req.session.spiller = {
+    req.session.spiller = { //gemmer navn og point i brugerens session
       navn: navn,
       point: 0
     };
 
-    spilSessions.set(req.sessionID, {
+    spilSessions.set(req.sessionID, { //Indsætter elementer i mappet
     navn: navn,
     spil: new Spil(),
     sidstAktiv: Date.now()
@@ -171,7 +171,7 @@ app.get("/spillere", findSpil, (req, res) => {
 
     for (const spiller of spilSessions.values()) {
 
-        if (nu - spiller.sidstAktiv < 15000) {
+        if (nu - spiller.sidstAktiv < 15000) { //Når vi skal opdatere listen af spilelre og ders point, tjekker vi om de har været aktive de sidste 15 sekunder hvis ikke kommer de ikke med på listen 
 
             spillere.push({
                 navn: spiller.navn,
@@ -185,9 +185,9 @@ app.get("/spillere", findSpil, (req, res) => {
 
 app.post("/aktiv", findSpil, (req, res) => {
 
-    const spiller = spilSessions.get(req.sessionID);
+    const spiller = spilSessions.get(req.sessionID); 
 
-    spiller.sidstAktiv = Date.now();
+    spiller.sidstAktiv = Date.now(); //Opdatere deres aktivitets paramter, (det er jo dette endpoint der bliver kaldt hver 5 sekund, så hvert 5 skund opdateres den til tiden nu)
 
     res.status(201).json({
         success: true

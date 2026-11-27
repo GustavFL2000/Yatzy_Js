@@ -303,18 +303,18 @@ async function opdaterSpillerListe() {
     }
 }
 
-async function aktivitet() {
+async function aktivitet() { //Bruger send aktiv fra facade
     try {
-        await sendAktiv();
+        await sendAktiv(); //Kalder denne fra facde
     } catch (error) {
         console.error("Aktivitet fejlede", error);
     }
 }
 
-aktivitet();
+aktivitet(); //Vi alder den lokale funktion 
 
-setInterval(aktivitet, 5000);
+setInterval(aktivitet, 5000); //Vi kalder aktivitet fucktionen en gang hver 5 sekund
 
-opdaterSpillerListe();
+opdaterSpillerListe(); //Vi kalder den lokal funktion 
 
-setInterval(opdaterSpillerListe, 2000);
+setInterval(opdaterSpillerListe, 2000); //Vi kalder opdadetspilerliste hver 2 sekund

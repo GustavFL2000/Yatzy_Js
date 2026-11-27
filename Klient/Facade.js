@@ -81,6 +81,6 @@ export const getSpillere = async () => {
     return await get(url + "/spillere");
 };
 
-export const sendAktiv = async () => {
+export const sendAktiv = async () => { //Kald til aktiv endpointet (det er den her heartbeat fuktion der ligger og tjekker om spilleren stadig er aktiv)
     return await post(url + "/aktiv", {});
 };
